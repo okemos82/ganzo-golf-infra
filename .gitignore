@@ -1,0 +1,15 @@
+# Terraform vars (contain secrets)
+*.tfvars
+!terraform.tfvars.example
+
+# Terraform internals
+.terraform/
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.backup
+tfplan
+crash.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
