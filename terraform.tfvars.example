@@ -1,5 +1,5 @@
 subscription_id     = "e44f9b78-12ae-4908-b217-4e32b069d1ac"
-location            = "eastus"
+location            = "eastus2"
 resource_group_name = "ganzo-golf-rg"
 app_name            = "ganzo-golf-app"
 db_server_name      = "ganzo-golf-db"
