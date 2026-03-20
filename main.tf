@@ -33,7 +33,7 @@ resource "azurerm_linux_web_app" "main" {
     DATABASE_URL                   = "postgresql://${var.db_admin_username}:${var.db_admin_password}@${azurerm_postgresql_flexible_server.main.fqdn}/${var.db_name}?sslmode=require"
     PYTHONUNBUFFERED               = "1"
     WEBSITES_PORT                  = "8000"
-    SCM_DO_BUILD_DURING_DEPLOYMENT = "false"
+    SCM_DO_BUILD_DURING_DEPLOYMENT = "true"
   }
 }
 
