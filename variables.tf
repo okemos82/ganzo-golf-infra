@@ -50,3 +50,9 @@ variable "openai_api_key" {
   type        = string
   sensitive   = true
 }
+
+variable "google_places_api_key" {
+  description = "Google Places API key"
+  type        = string
+  sensitive   = true
+}

@@ -30,6 +30,7 @@ resource "azurerm_linux_web_app" "main" {
 
   app_settings = {
     OPENAI_API_KEY                 = var.openai_api_key
+    GOOGLE_PLACES_API_KEY          = var.google_places_api_key
     DATABASE_URL                   = "postgresql://${var.db_admin_username}:${var.db_admin_password}@${azurerm_postgresql_flexible_server.main.fqdn}/${var.db_name}?sslmode=require"
     PYTHONUNBUFFERED               = "1"
     WEBSITES_PORT                  = "8000"
