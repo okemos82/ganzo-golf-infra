@@ -10,7 +10,7 @@ resource "azurerm_service_plan" "main" {
   resource_group_name = azurerm_resource_group.main.name
   location            = azurerm_resource_group.main.location
   os_type             = "Linux"
-  sku_name            = "B1"
+  sku_name            = "F1"
 }
 
 # ── App Service ───────────────────────────────────────────────
@@ -21,6 +21,7 @@ resource "azurerm_linux_web_app" "main" {
   service_plan_id     = azurerm_service_plan.main.id
 
   site_config {
+    always_on = false   # not supported on F1 free tier
     application_stack {
       python_version = "3.12"
     }
