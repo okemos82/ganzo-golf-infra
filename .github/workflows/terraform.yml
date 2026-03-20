@@ -10,9 +10,10 @@ env:
   ARM_CLIENT_SECRET:   ${{ secrets.ARM_CLIENT_SECRET }}
   ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
   ARM_TENANT_ID:       ${{ secrets.ARM_TENANT_ID }}
-  TF_VAR_subscription_id:    ${{ secrets.ARM_SUBSCRIPTION_ID }}
-  TF_VAR_db_admin_password:  ${{ secrets.TF_VAR_DB_ADMIN_PASSWORD }}
-  TF_VAR_openai_api_key:     ${{ secrets.TF_VAR_OPENAI_API_KEY }}
+  TF_VAR_subscription_id:       ${{ secrets.ARM_SUBSCRIPTION_ID }}
+  TF_VAR_db_admin_password:     ${{ secrets.TF_VAR_DB_ADMIN_PASSWORD }}
+  TF_VAR_openai_api_key:        ${{ secrets.TF_VAR_OPENAI_API_KEY }}
+  TF_VAR_google_places_api_key: ${{ secrets.TF_VAR_GOOGLE_PLACES_API_KEY }}
 
 jobs:
   plan:
