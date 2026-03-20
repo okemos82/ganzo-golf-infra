@@ -1,0 +1,49 @@
+name: DB Schedule
+
+on:
+  schedule:
+    - cron: "0 7 * * *"    # Start  — 7:00 AM UTC daily
+    - cron: "0 22 * * *"   # Stop   — 10:00 PM UTC daily
+  workflow_dispatch:
+    inputs:
+      action:
+        description: "start or stop"
+        required: true
+        default: "start"
+        type: choice
+        options: [start, stop]
+
+jobs:
+  manage-db:
+    name: ${{ github.event.schedule == '0 22 * * *' && 'Stop' || 'Start' }} PostgreSQL
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Azure Login
+        uses: azure/login@v2
+        with:
+          creds: >
+            {
+              "clientId": "${{ secrets.ARM_CLIENT_ID }}",
+              "clientSecret": "${{ secrets.ARM_CLIENT_SECRET }}",
+              "subscriptionId": "${{ secrets.ARM_SUBSCRIPTION_ID }}",
+              "tenantId": "${{ secrets.ARM_TENANT_ID }}"
+            }
+
+      - name: Start DB (scheduled or manual)
+        if: github.event.schedule == '0 7 * * *' || inputs.action == 'start'
+        run: |
+          echo "Starting PostgreSQL server..."
+          az postgres flexible-server start \
+            --resource-group ganzo-golf-rg \
+            --name ganzo-golf-db
+          echo "DB started ✅"
+
+      - name: Stop DB (scheduled or manual)
+        if: github.event.schedule == '0 22 * * *' || inputs.action == 'stop'
+        run: |
+          echo "Stopping PostgreSQL server..."
+          az postgres flexible-server stop \
+            --resource-group ganzo-golf-rg \
+            --name ganzo-golf-db
+          echo "DB stopped ✅"
